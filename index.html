@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>痩せない原因診断｜あなたの詰まりはどこ？</title>
+<meta name="description" content="16の質問で、あなたの痩せない原因がどこで詰まっているかを5つの軸で可視化。食べる量・栄養・食欲・生活リズム・続け方をスコア化して、今日からやることまで提案します。">
+<meta name="theme-color" content="#2E4A22">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="痩せない原因診断">
+<meta property="og:description" content="16問・約3分。あなたの痩せない原因が5つの軸のどこにあるかを可視化します。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%AD%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ===== デザイントークン（アイボリー×深緑×ゴールド／Noto Sans JP） ===== */
+  :root{
+    --brand:#2E4A22; --brand-d:#22381A; --brand2:#B99A4E;
+    --bg:#FBF9F4; --card:#FFFFFF; --ink:#232A1E; --muted:#7A7F6E;
+    --line:#E8E3D5; --soft:#F6F3EA; --track:#EDE9DC;
+    --ok:#3D5C2E; --ok-bg:#EDF1E6; --warn:#8A6D28; --warn-bg:#F8F1E2; --warn-line:#E3D3AE;
+    --accent:#B4534E; --accent-bg:#F7EDEC;
+    --shadow:0 2px 4px rgba(60,55,35,.04), 0 10px 24px rgba(60,55,35,.07);
+    --shadow-sm:0 1px 3px rgba(60,55,35,.06);
+    --r:14px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --brand:#9CB98A; --brand-d:#B4CDA2; --brand2:#D6BC7B;
+      --bg:#14170F; --card:#1D2118; --ink:#EDEFE6; --muted:#9EA492;
+      --line:#2C3226; --soft:#191D12; --track:#2A3024;
+      --ok:#A9C795; --ok-bg:#22301B; --warn:#D6BC7B; --warn-bg:#302716; --warn-line:#4A3D1F;
+      --accent:#D98078; --accent-bg:#2E211F;
+      --shadow:0 2px 4px rgba(0,0,0,.4), 0 10px 24px rgba(0,0,0,.4);
+      --shadow-sm:0 1px 3px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --brand:#9CB98A; --brand-d:#B4CDA2; --brand2:#D6BC7B;
+    --bg:#14170F; --card:#1D2118; --ink:#EDEFE6; --muted:#9EA492;
+    --line:#2C3226; --soft:#191D12; --track:#2A3024;
+    --ok:#A9C795; --ok-bg:#22301B; --warn:#D6BC7B; --warn-bg:#302716; --warn-line:#4A3D1F;
+    --accent:#D98078; --accent-bg:#2E211F;
+    --shadow:0 2px 4px rgba(0,0,0,.4), 0 10px 24px rgba(0,0,0,.4);
+    --shadow-sm:0 1px 3px rgba(0,0,0,.4);
+  }
+  *{box-sizing:border-box}
+  html,body{overflow-x:hidden}
+  body{margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,system-ui,sans-serif;
+    line-height:1.7; -webkit-text-size-adjust:100%}
+  main{max-width:600px; margin:0 auto; padding:0 16px 72px}
+  section[hidden]{display:none}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow); padding:20px; margin:0 0 14px}
+
+  /* ===== LP ===== */
+  .lp{padding-top:30px; text-align:center}
+  .hero{display:block; width:100%; max-width:250px; margin:14px auto 2px; height:auto}
+  .ribbon{display:inline-block; background:var(--brand); color:#fff; font-size:10.5px; font-weight:900; letter-spacing:.16em; padding:5px 14px; border-radius:999px}
+  .lp h1{margin:18px 0 0; font-size:27px; font-weight:900; line-height:1.5; letter-spacing:.01em}
+  .lp h1 .mk{background:linear-gradient(transparent 62%, rgba(185,154,78,.42) 62%); padding:0 2px}
+  .lp .sub{margin:14px 0 0; font-size:14px; color:var(--muted)}
+  .lead{text-align:left; font-size:14.5px; margin-top:22px}
+  .lead p{margin:0 0 12px}
+  .lead p:last-child{margin-bottom:0}
+  .lead b{font-weight:900; color:var(--brand)}
+  .badges{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:0 0 18px}
+  .badge{background:var(--soft); border:1px solid var(--line); border-radius:14px; padding:12px 6px; text-align:center}
+  .badge .n{font-size:25px; font-weight:900; color:var(--brand); line-height:1.1}
+  .badge .l{font-size:10px; font-weight:800; letter-spacing:.1em; color:var(--muted); margin-top:3px}
+  .axes{display:flex; flex-wrap:wrap; gap:7px; justify-content:center; margin:2px 0 0}
+  .axes span{font-size:11.5px; font-weight:800; color:var(--brand); background:var(--ok-bg); border-radius:999px; padding:5px 11px}
+  .note{font-size:11.5px; color:var(--muted); text-align:center; margin:12px 2px 0; line-height:1.65}
+
+  /* ===== 設問 ===== */
+  .qhead{position:sticky; top:0; z-index:10; background:var(--bg); padding:16px 0 12px}
+  .qtop{display:flex; align-items:center; justify-content:space-between; gap:10px}
+  .count{font-size:13px; font-weight:800; color:var(--muted)}
+  .count b{font-size:25px; font-weight:900; color:var(--brand); margin-right:2px}
+  .cat{font-size:10.5px; font-weight:900; letter-spacing:.1em; color:#fff; background:var(--brand); padding:5px 12px; border-radius:999px; white-space:nowrap}
+  .bar{height:7px; background:var(--track); border-radius:999px; margin-top:10px; overflow:hidden}
+  .bar i{display:block; height:100%; width:0; border-radius:999px; background:linear-gradient(90deg,var(--brand),var(--brand2)); transition:width .3s ease}
+  .qtitle{font-size:20px; font-weight:900; line-height:1.55; margin:6px 0 0}
+  .qhint{font-size:12.5px; color:var(--muted); background:var(--soft); border-left:3px solid var(--brand2); border-radius:0 10px 10px 0; padding:9px 12px; margin:12px 0 0}
+  .opts{margin:16px 0 0; display:grid; gap:10px}
+  .opt{display:flex; align-items:center; gap:12px; width:100%; text-align:left; background:var(--card); border:1.5px solid var(--line);
+    border-radius:13px; padding:15px 16px; font-family:inherit; font-size:15px; font-weight:700; color:var(--ink);
+    cursor:pointer; box-shadow:var(--shadow-sm); transition:border-color .15s, background .15s}
+  .opt .dot{flex:0 0 auto; width:20px; height:20px; border-radius:50%; border:2px solid var(--line); position:relative}
+  .opt[aria-checked="true"]{border-color:var(--brand); background:var(--ok-bg)}
+  .opt[aria-checked="true"] .dot{border-color:var(--brand)}
+  .opt[aria-checked="true"] .dot::after{content:""; position:absolute; inset:3px; border-radius:50%; background:var(--brand)}
+  .opt:focus-visible{outline:3px solid rgba(185,154,78,.5); outline-offset:2px}
+  .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; margin:22px 0 0; padding-top:18px; border-top:1px dashed var(--line)}
+  .btn{border:none; background:var(--brand); color:#fff; font-family:inherit; font-weight:900; font-size:15px; padding:14px 24px; border-radius:999px; cursor:pointer; box-shadow:var(--shadow-sm)}
+  .btn:active{background:var(--brand-d)}
+  .btn[disabled]{background:var(--track); color:var(--muted); cursor:default; box-shadow:none}
+  .btn.full{width:100%; border-radius:14px; font-size:16.5px; padding:17px 24px}
+  .btn.ghost{background:transparent; color:var(--brand); border:1.5px solid var(--brand); box-shadow:none}
+  .btn.sm{font-size:13px; padding:10px 18px}
+  .back{border:none; background:transparent; color:var(--muted); font-family:inherit; font-size:14px; font-weight:800; padding:10px 4px; cursor:pointer}
+
+  /* ===== 結果 ===== */
+  .rhead{text-align:center; padding:26px 0 4px}
+  .rhead .t{font-size:11px; font-weight:900; letter-spacing:.2em; color:var(--muted)}
+  .rhead h2{margin:6px 0 0; font-size:24px; font-weight:900}
+  .scorewrap{text-align:center; border-bottom:1px dashed var(--line); padding-bottom:18px; margin-bottom:18px}
+  .stage{display:inline-block; font-size:13.5px; font-weight:900; color:var(--brand); background:var(--ok-bg); border-radius:999px; padding:6px 16px}
+  .score{font-size:56px; font-weight:900; color:var(--brand); line-height:1.1; margin-top:8px}
+  .score small{font-size:16px; color:var(--muted); font-weight:800}
+  .scorelbl{font-size:11.5px; font-weight:900; letter-spacing:.14em; color:var(--muted)}
+  .radar{display:block; width:100%; max-width:340px; margin:0 auto; height:auto}
+  .axlist{display:grid; gap:9px; margin:18px 0 0}
+  .axrow{display:grid; grid-template-columns:96px 1fr 44px; align-items:center; gap:10px; font-size:12.5px; font-weight:800}
+  .axrow .tr{height:9px; background:var(--track); border-radius:999px; overflow:hidden}
+  .axrow .tr i{display:block; height:100%; border-radius:999px; background:var(--brand)}
+  .axrow.low .tr i{background:var(--accent)}
+  .axrow.low .nm{color:var(--accent)}
+  .axrow .pc{text-align:right; color:var(--muted)}
+  .typecard{border:2px solid var(--brand2); background:linear-gradient(160deg, rgba(185,154,78,.13), var(--card) 55%)}
+  .typecard .kicker{font-size:11.5px; font-weight:900; letter-spacing:.12em; color:var(--warn); text-align:center}
+  .typecard h3{margin:8px 0 0; font-size:25px; font-weight:900; text-align:center; line-height:1.4}
+  .typecard .catch{margin:10px 0 0; font-size:15px; font-weight:800; color:var(--brand); text-align:center; line-height:1.65}
+  h4.sec{margin:22px 0 10px; font-size:15px; font-weight:900; display:flex; align-items:center; gap:8px}
+  h4.sec::before{content:""; width:4px; height:17px; border-radius:2px; background:var(--brand2)}
+  .checks{margin:0; padding:0; list-style:none; display:grid; gap:8px}
+  .checks li{position:relative; padding-left:26px; font-size:14px}
+  .checks li::before{content:"✓"; position:absolute; left:4px; top:0; color:var(--brand); font-weight:900}
+  .body p{margin:0 0 12px; font-size:14.5px}
+  .body p:last-child{margin-bottom:0}
+  .body b{font-weight:900; color:var(--brand)}
+  .steps{margin:0; padding:0; list-style:none; display:grid; gap:10px; counter-reset:s}
+  .steps li{counter-increment:s; background:var(--soft); border:1px solid var(--line); border-radius:12px; padding:13px 14px 13px 46px; position:relative; font-size:14px; font-weight:700}
+  .steps li::before{content:counter(s); position:absolute; left:13px; top:12px; width:22px; height:22px; border-radius:7px; background:var(--brand); color:#fff; font-size:12px; font-weight:900; display:flex; align-items:center; justify-content:center}
+  .steps li span{display:block; font-weight:400; font-size:12.5px; color:var(--muted); margin-top:3px}
+  .nextup{background:var(--warn-bg); border:1px solid var(--warn-line); border-radius:12px; padding:13px 15px; font-size:13.5px; margin:0}
+  .nextup b{color:var(--warn); font-weight:900}
+  .actions{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:4px 0 18px}
+  .disc{font-size:11.5px; color:var(--muted); line-height:1.7; background:var(--soft); border-radius:12px; padding:13px 15px}
+  .toast{position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(12px); background:var(--brand); color:#fff;
+    font-size:13px; font-weight:800; padding:11px 20px; border-radius:999px; opacity:0; pointer-events:none; transition:.25s; z-index:50}
+  .toast.on{opacity:1; transform:translateX(-50%) translateY(0)}
+  @media (max-width:380px){
+    .lp h1{font-size:23px}
+    .qtitle{font-size:18px}
+    .axrow{grid-template-columns:80px 1fr 40px}
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ========== LP ========== -->
+<section id="lp">
+  <div class="lp">
+    <span class="ribbon">無 料 診 断</span>
+
+    <svg class="hero" viewBox="0 0 240 200" role="img" aria-label="5つの軸を虫めがねで確かめるイラスト">
+      <circle cx="120" cy="96" r="82" fill="var(--ok-bg)"/>
+      <g fill="none" stroke="var(--brand)" stroke-width="2" stroke-linejoin="round" opacity=".35">
+        <polygon points="120,36 177,77 155,144 85,144 63,77"/>
+        <polygon points="120,66 148,86 137,119 103,119 92,86"/>
+        <line x1="120" y1="96" x2="120" y2="36"/>
+        <line x1="120" y1="96" x2="177" y2="77"/>
+        <line x1="120" y1="96" x2="155" y2="144"/>
+        <line x1="120" y1="96" x2="85" y2="144"/>
+        <line x1="120" y1="96" x2="63" y2="77"/>
+      </g>
+      <polygon points="120,48 165,81 146,133 96,127 79,84" fill="var(--brand)" fill-opacity=".16" stroke="var(--brand)" stroke-width="3" stroke-linejoin="round"/>
+      <circle cx="120" cy="48" r="4.5" fill="var(--brand)"/>
+      <circle cx="165" cy="81" r="4.5" fill="var(--brand)"/>
+      <circle cx="146" cy="133" r="4.5" fill="var(--brand)"/>
+      <circle cx="79" cy="84" r="4.5" fill="var(--brand)"/>
+      <circle cx="96" cy="127" r="7" fill="var(--accent)"/>
+      <g stroke="var(--brand2)" stroke-width="6" fill="none" stroke-linecap="round">
+        <circle cx="96" cy="127" r="30" fill="var(--card)" fill-opacity=".28"/>
+        <line x1="76" y1="150" x2="55" y2="174"/>
+      </g>
+    </svg>
+
+    <h1>あなたの<span class="mk">「痩せない原因」</span>は<br>5つのうち、どこ？</h1>
+    <p class="sub">16問・約3分・登録不要</p>
+  </div>
+
+  <div class="card lead">
+    <p>うまくいかないのは、意志の強さではなく<b>詰まっている場所</b>の問題です。一番低いところが、全体の足を引っ張ります。</p>
+  </div>
+
+  <div class="badges">
+    <div class="badge"><div class="n">16</div><div class="l">QUESTIONS</div></div>
+    <div class="badge"><div class="n">3</div><div class="l">MINUTES</div></div>
+    <div class="badge"><div class="n">5</div><div class="l">AXES</div></div>
+  </div>
+
+  <div class="axes">
+    <span>食べる量</span><span>栄養バランス</span><span>食欲</span><span>生活リズム</span><span>続け方</span>
+  </div>
+
+  <div style="margin-top:22px">
+    <button class="btn full" id="start">診断をはじめる</button>
+    <p class="note">回答は端末の中だけで処理されます。<br>個人情報の入力やメール登録は必要ありません。</p>
+  </div>
+</section>
+
+<!-- ========== 設問 ========== -->
+<section id="quiz" hidden>
+  <div class="qhead">
+    <div class="qtop">
+      <div class="count"><b id="qnum">01</b>/ 16</div>
+      <div class="cat" id="qcat">食べる量</div>
+    </div>
+    <div class="bar"><i id="qbar"></i></div>
+  </div>
+  <div class="card">
+    <h2 class="qtitle" id="qtitle"></h2>
+    <p class="qhint" id="qhint" hidden></p>
+    <div class="opts" id="qopts" role="radiogroup" aria-labelledby="qtitle"></div>
+    <div class="nav">
+      <button class="back" id="prev">← もどる</button>
+      <button class="btn" id="next" disabled>つぎへ →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 結果 ========== -->
+<section id="result" hidden>
+  <div class="rhead">
+    <div class="t">YOUR RESULT</div>
+    <h2>診断結果</h2>
+  </div>
+
+  <div class="card">
+    <div class="scorewrap">
+      <div class="stage" id="rStage"></div>
+      <div class="score" id="rScore">0<small>/100</small></div>
+      <div class="scorelbl">TOTAL SCORE</div>
+    </div>
+    <svg class="radar" id="radar" viewBox="0 0 340 300" role="img" aria-label="5つの軸のスコア"></svg>
+    <div class="axlist" id="axlist"></div>
+  </div>
+
+  <div class="card typecard">
+    <div class="kicker">あなたの一番の詰まり</div>
+    <h3 id="tName"></h3>
+    <p class="catch" id="tCatch"></p>
+  </div>
+
+  <div class="card">
+    <h4 class="sec" style="margin-top:0">思い当たりませんか</h4>
+    <ul class="checks" id="tChecks"></ul>
+    <h4 class="sec">なぜ、そうなるのか</h4>
+    <div class="body" id="tWhy"></div>
+    <h4 class="sec">今日からやる3つ</h4>
+    <ul class="steps" id="tSteps"></ul>
+    <h4 class="sec">次の課題</h4>
+    <p class="nextup" id="tNext"></p>
+  </div>
+
+  <div class="actions">
+    <button class="btn ghost sm" id="copy">結果をコピー</button>
+    <button class="btn ghost sm" id="again">もう一度診断する</button>
+  </div>
+
+  <p class="disc">この診断は医療行為ではなく、生活習慣を振り返るためのものです。結果は病気の有無を判定するものではありません。体調に不安がある場合や、治療中・妊娠中の方は、必ず医師にご相談ください。</p>
+</section>
+
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   設問データ  選択肢の並び＝0点（良い）〜3点（課題）
+   ========================================================= */
+const AXES = [
+  {key:"energy", name:"食べる量",     short:"食べる量"},
+  {key:"nutri",  name:"栄養バランス", short:"栄養"},
+  {key:"appet",  name:"食欲",         short:"食欲"},
+  {key:"life",   name:"生活リズム",   short:"生活リズム"},
+  {key:"keep",   name:"続け方",       short:"続け方"}
+];
+
+const QUESTIONS = [
+  // ① 食べる量
+  {ax:"energy", q:"ダイエットを始めてから、主食の盛り方はどう変わった？", hint:"ごはん・パン・麺など、主食全般のことです。",
+   o:["前と変わらず、普通に盛っている","気持ち少なめにしている","半分くらいまで減らした","できるだけ盛らないようにしている"]},
+  {ax:"energy", q:"忙しさや我慢で、食事を1回とばしてしまうことは？",
+   o:["まずない","月に数回くらい","週に2〜3回はある","気づけばほぼ毎日どこかとばしている"]},
+  {ax:"energy", q:"体重が止まったとき、まず何をしてきた？",
+   o:["食事量は変えず、様子をみた","食べ方や中身を見直した","とりあえず食べる量を減らした","何も食べない日をつくった"]},
+  // ② 栄養バランス
+  {ax:"nutri", q:"毎食、たんぱく質は入っている？", hint:"肉・魚・卵・大豆製品・乳製品のことです。",
+   o:["3食とも入っている","2食は入っている","1食だけ入っている","意識したことがない"]},
+  {ax:"nutri", q:"「今日は野菜をとれた」と言える日は、週にどのくらい？", hint:"きのこ・海藻・具だくさんの汁物もふくみます。",
+   o:["ほぼ毎日といえる","週の半分くらい","週に1〜2日","ほとんどない"]},
+  {ax:"nutri", q:"夜ごはんの炭水化物は、どうしている？",
+   o:["昼と同じように食べる","少なめにする","だいたい抜いている","夜は絶対に入れない"]},
+  {ax:"nutri", q:"起きてから最初に何かを口にするのは、いつ？",
+   o:["起きて2時間以内には食べる","朝は軽くつまむ程度","気が向いた日だけ食べる","昼まで何も食べない"]},
+  // ③ 食欲
+  {ax:"appet", q:"夕方から夜にかけて、食べ物のことを考えている時間は？",
+   o:["ほとんど考えない","たまに頭をよぎる","気づくと何度も考えている","ずっと頭から離れない"]},
+  {ax:"appet", q:"甘いものやお菓子に手がのびるのは、どんなとき？",
+   o:["食後や休日など、決めたときだけ","たまに、なんとなく","疲れた日はほぼ毎日","理由なく1日に何度も"]},
+  {ax:"appet", q:"食事を終えたあと、食器を下げるまでの感覚に近いのは？", hint:"食べる速さを聞いています。",
+   o:["会話や味を楽しみ、ゆっくり終わる","無理のないペースで食べ終わる","気づけば早く終わっている","5分ほどでかき込んで終わり"]},
+  // ④ 生活リズム
+  {ax:"life", q:"朝、目が覚めたときの感覚は？",
+   o:["すっきり起きられる","もう少し寝たいが動ける","起きるのがつらい日が多い","毎朝ぐったりしている"]},
+  {ax:"life", q:"1日のうち、座っている時間はどのくらい？", hint:"仕事・家事・スマホの時間もふくめて考えてください。",
+   o:["こまめに動き、あまり座らない","半分くらいは動いている","ほとんど座って過ごしている","動くのは家の中の移動くらい"]},
+  {ax:"life", q:"水（お茶やコーヒーは除く）を飲む習慣は？",
+   o:["意識して1日こまめに飲んでいる","気が向いたときに飲む","のどが渇いたときだけ","水はほとんど飲まない"]},
+  // ⑤ 続け方
+  {ax:"keep", q:"体重や食べたものを書き留める習慣は？",
+   o:["いまも続いている","思い出したときにつける","始めては、やめてを繰り返す","つけたことがない"]},
+  {ax:"keep", q:"食べすぎた次の日、どう過ごす？",
+   o:["気にせず、いつも通りに食べる","少しだけ軽めにする","埋め合わせに食事を抜く","もういいやと、そのまま続けてしまう"]},
+  {ax:"keep", q:"これまでのダイエットを振り返ると？",
+   o:["落ちた体重を、いまも保てている","1度だけ戻ったことがある","落ちては戻るを2〜3回","何度繰り返したか覚えていない"]}
+];
+
+/* =========================================================
+   タイプ定義（一番低い軸で判定）
+   ========================================================= */
+const TYPES = {
+  energy:{
+    name:"省エネモードタイプ",
+    catch:"減らしているのに、減らない。<br>体が「守り」に入っているサインです。",
+    checks:["食べる量は前より減っているのに、体重が止まっている","前より疲れやすい／午後に電池が切れる","少し食べただけで戻った気がする","一度落ちても、すぐ元に戻ってしまう","気づくと甘いものを探している"],
+    why:"<p>体には、入ってくるエネルギーが少ない状態が続くと、<b>使うほうを抑えて帳尻を合わせる仕組み</b>があります。収入が減った家計が、まず生活費から削るのと同じです。</p><p>つまり、減らせば減らすほど体は省エネになり、<b>同じ量を食べても太りやすい状態</b>に近づいていきます。停滞したときにさらに減らすと、この流れが加速します。</p><p>ここで必要なのは、もっと減らすことではありません。<b>体が安心してエネルギーを使える量まで戻すこと</b>です。ただし一気に戻すと体重が動くので、少しずつ増やしていくのが鉄則です。</p>",
+    steps:[["今の食事量を3日だけ書き出す","減らす前に、まず「今どれだけ食べているか」を知る。ここを飛ばすと、何を戻せばいいか決められません。"],["1食のごはんを週に10gずつ増やす","いきなり倍にはしない。週単位で少しずつ戻すと、体重を大きく動かさずに量を戻せます。"],["欠食をやめて3食に固定する","1回の量より、まず回数です。3食に分けるだけで、日中の空腹と夜の反動が落ち着きます。"]]
+  },
+  nutri:{
+    name:"栄養すき間タイプ",
+    catch:"カロリーは足りていても、<br>代謝を回す材料が足りていません。",
+    checks:["食事はパン・麺・おにぎりで済ませることが多い","肉や魚を「太りそう」で避けている","野菜は食べたり食べなかったり","夜だけ主食を抜くのが習慣になっている","食べたのに、なんとなく満たされない"],
+    why:"<p>体は、食べたものをそのままエネルギーに変えているわけではありません。<b>たんぱく質・ビタミン・ミネラルという「材料」を使って燃やしています</b>。材料が足りなければ、量を食べても回りません。</p><p>とくに主食を抜くと、体はたんぱく質をエネルギーに回してしまい、<b>筋肉が削られて代謝が落ちる</b>という遠回りが起きます。減った体重の中身が筋肉だと、戻ったときには脂肪として戻ります。</p><p>目安は、たんぱく質2・脂質2・炭水化物6のバランス。計算が苦手なら、<b>お米1・おかず1・野菜2という見た目の比率</b>で十分近づきます。</p>",
+    steps:[["毎食、手のひら1枚分のたんぱく質を置く","肉・魚・卵・豆腐のどれか。まず1食から始めて、3食に広げます。"],["主食は抜かずに、量で調整する","抜くのではなく減らす。夜だけ抜く習慣をやめるだけで、翌朝の食欲が変わります。"],["野菜・きのこ・海藻をもう1品足す","カット野菜・冷凍野菜・味噌汁の具でかまいません。作らずに足せる形にしておきます。"]]
+  },
+  appet:{
+    name:"夜に崩れるタイプ",
+    catch:"意志の問題ではありません。<br>日中の我慢が、夜に跳ね返っています。",
+    checks:["日中は我慢できるのに、夜になると止まらない","夕方に強い空腹がきて、そこから食べ続けてしまう","お腹は空いていないのに口さみしい","食べ終わったあとに後悔する","甘いものを食べると、もっと欲しくなる"],
+    why:"<p>夜の食欲は、その日の昼までに決まっています。<b>朝と昼が少なすぎると、体は夕方から取り返そうとします</b>。ここで我慢比べをしても、勝てるようにはできていません。</p><p>さらに早食いだと、満腹の信号が届く前に食べ終わるため、<b>食べた量に関係なく満足感が残りません</b>。噛む回数が減るほど、食後にまた探してしまいます。</p><p>やるべきは我慢の強化ではなく、<b>そもそも暴走が起きない条件をつくること</b>。前半に食べる、噛む、目に入る場所から動かす。この3つで大半は落ち着きます。</p>",
+    steps:[["朝と昼のたんぱく質を増やす","夜の食欲は、昼までの不足の反動です。前半で満たすほど、夜は静かになります。"],["ひと口ごとに箸を置く","20分かけるための一番簡単な方法。噛む回数が増え、途中で満足に気づけます。"],["「食べたくなったら○○する」を1つ決める","お茶を淹れる、歯を磨く、席を立つ。決めておくと、その場の意志に頼らずに済みます。"]]
+  },
+  life:{
+    name:"土台ゆらぎタイプ",
+    catch:"食事の前に、<br>体が働ける状態になっていません。",
+    checks:["寝不足の日が週の半分以上ある","気づくと1日ほとんど座っている","水よりコーヒーやお茶のほうが多い","朝から体が重い／だるい","疲れている日ほど、食べたくなる"],
+    why:"<p>睡眠が足りない日は、<b>食欲を強める信号が増え、抑える信号が減ります</b>。同じ意志の強さでも、寝不足の日は食べすぎて当たり前ということです。食事を整える前にここが崩れていると、土台が抜けたままになります。</p><p>活動量も同じです。運動をするかどうかより、<b>座っている時間の長さ</b>が1日の消費を決めています。まとまった運動より、こまめに立つほうが効きます。</p><p>水分は代謝の入れ物です。足りないとめぐりが落ち、むくみや便通の不調につながります。<b>整える順番は、睡眠 → 活動 → 水分</b>。ここが戻ると、食事の努力がやっと結果に変わります。</p>",
+    steps:[["寝る時刻を30分だけ前倒しする","起きる時刻はいじらない。まず就寝を前に動かすほうが定着します。"],["1時間に1回、立ち上がる","運動を増やすより、座り続ける時間を切るほうが現実的で、続きます。"],["机とカバンに水を1本置く","飲む量ではなく、手が届く場所に置く。飲むかどうかは環境で決まります。"]]
+  },
+  keep:{
+    name:"リセット癖タイプ",
+    catch:"続かないのではありません。<br>崩れたあとの戻し方を知らないだけです。",
+    checks:["始めるときは本気だが、2週間ほどで止まる","1回食べすぎると「もういいや」となる","翌日に食事を抜いて取り返そうとする","記録は何度も始めて、何度もやめている","落ちてはリバウンド、を繰り返してきた"],
+    why:"<p>うまくいく人は、崩れないわけではありません。<b>崩れたあと、次の1食で戻しているだけ</b>です。差がつくのは頑張った量ではなく、戻すまでの速さです。</p><p>ところが、食べすぎた翌日に食事を抜くと、体は不足と反動を同時に受けます。<b>取り返そうとする行動が、次の暴走を呼ぶ</b>という悪循環がここで生まれます。</p><p>完璧を狙うほど、1回の失敗で全部が終わります。<b>70点を続けるほうが、100点を3日やるより結果が出る</b>。続けるとは、崩れない技術ではなく、戻る技術のことです。</p>",
+    steps:[["食べすぎた次の1食を、いつも通りに戻す","抜かない、倍返ししない。ここを守るだけで、リバウンドの入口が閉じます。"],["記録は体重だけ、朝1回にする","項目を減らすほど続きます。続いてから、食事の記録を足していきます。"],["「これだけは守る」を1つに絞る","3食たべる、でもかまいません。守れた日が積み上がると、自信のほうが先に戻ります。"]]
+  },
+  good:{
+    name:"土台キープタイプ",
+    catch:"大きな穴はありません。<br>ここからは微調整の段階です。",
+    checks:["3食たべることが習慣になっている","たんぱく質と野菜を意識できている","食べすぎても、翌日には戻せる","睡眠と活動量が大きく崩れていない","記録や振り返りの習慣がある"],
+    why:"<p>ここまで整っている人が停滞するとき、原因は「足りないこと」ではなく<b>ズレていること</b>にあります。体重が変われば必要な量も変わるため、以前うまくいったやり方が、今の体には合っていない場合があります。</p><p>この段階でやりがちなのが、さらに減らす方向への微調整です。<b>土台がある人ほど、減らすより整えるほうが動きます</b>。栄養の抜け、睡眠の質、活動量の変化。どれか1つが静かに落ちていることが多いです。</p><p>次に見るのは体重ではなく、<b>体脂肪・見た目・服のサイズ・体調</b>。体重が止まっていても、中身が変わっている時期はあります。</p>",
+    steps:[["2週間の平均体重で判断する","1日の増減は水分です。平均で見ると、止まっているのか動いているのかが分かります。"],["体重以外の指標を1つ足す","写真・ウエスト・服のサイズのどれか。停滞期に折れにくくなります。"],["今の体重に合わせて量を見直す","痩せた分だけ必要量も減ります。以前の設定のままになっていないか確認します。"]]
+  }
+};
+
+const NEXT_HINT = {
+  energy:"食べる量。ここが低いままだと、他を整えても体は省エネのままです。1食のごはんの量と、3食たべられているかを見直しましょう。",
+  nutri:"栄養バランス。たんぱく質と野菜が足りているか、主食を抜いていないか。材料が足りないと、量を食べても回りません。",
+  appet:"食欲のコントロール。夜に崩れるなら、原因は夜ではなく朝と昼にあります。前半の食事を厚くしてみてください。",
+  life:"生活リズム。睡眠・活動量・水分。食事の努力が結果に変わるかどうかは、ここで決まります。",
+  keep:"続け方。崩れた翌日にどう戻すか。抜いて取り返さないというルールを、先に決めておきましょう。"
+};
+
+const STAGES = [
+  {min:80, label:"土台ができています"},
+  {min:60, label:"あと一歩のところです"},
+  {min:40, label:"詰まりが出ています"},
+  {min:0,  label:"立て直しの時期です"}
+];
+
+/* =========================================================
+   状態
+   ========================================================= */
+const answers = new Array(QUESTIONS.length).fill(null);
+let cur = 0;
+
+const $ = id => document.getElementById(id);
+const lp = $("lp"), quiz = $("quiz"), result = $("result");
+
+function show(sec){
+  [lp,quiz,result].forEach(s => s.hidden = (s !== sec));
+  window.scrollTo(0,0);
+}
+
+/* ---------- 設問描画 ---------- */
+function renderQ(){
+  const q = QUESTIONS[cur];
+  $("qnum").textContent = String(cur+1).padStart(2,"0");
+  $("qcat").textContent = AXES.find(a => a.key === q.ax).name;
+  $("qbar").style.width = (cur / QUESTIONS.length * 100) + "%";
+  $("qtitle").textContent = q.q;
+
+  const hint = $("qhint");
+  if(q.hint){ hint.textContent = q.hint; hint.hidden = false; } else { hint.hidden = true; }
+
+  const box = $("qopts");
+  box.innerHTML = "";
+  q.o.forEach((label, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "opt";
+    b.setAttribute("role","radio");
+    b.setAttribute("aria-checked", answers[cur] === i ? "true" : "false");
+    const dot = document.createElement("span"); dot.className = "dot";
+    const txt = document.createElement("span"); txt.textContent = label;
+    b.append(dot, txt);
+    b.addEventListener("click", () => {
+      answers[cur] = i;
+      [...box.children].forEach((c, ci) => c.setAttribute("aria-checked", ci === i ? "true" : "false"));
+      $("next").disabled = false;
+    });
+    box.appendChild(b);
+  });
+
+  $("next").disabled = answers[cur] === null;
+  $("next").textContent = (cur === QUESTIONS.length - 1) ? "結果を見る →" : "つぎへ →";
+  $("prev").style.visibility = cur === 0 ? "hidden" : "visible";
+}
+
+$("start").addEventListener("click", () => { show(quiz); renderQ(); });
+$("prev").addEventListener("click", () => { if(cur > 0){ cur--; renderQ(); } });
+$("next").addEventListener("click", () => {
+  if(answers[cur] === null) return;
+  if(cur < QUESTIONS.length - 1){ cur++; renderQ(); window.scrollTo(0,0); }
+  else { calc(); show(result); }
+});
+$("again").addEventListener("click", () => { answers.fill(null); cur = 0; show(lp); });
+
+/* ---------- 判定 ---------- */
+let lastSummary = "";
+
+function calc(){
+  const raw = {}, max = {};
+  AXES.forEach(a => { raw[a.key] = 0; max[a.key] = 0; });
+  QUESTIONS.forEach((q, i) => { raw[q.ax] += answers[i]; max[q.ax] += 3; });
+
+  const pct = AXES.map(a => ({
+    key:a.key, name:a.name, short:a.short,
+    v: Math.round((max[a.key] - raw[a.key]) / max[a.key] * 100)
+  }));
+  const total = Math.round(pct.reduce((s,p) => s + p.v, 0) / pct.length);
+
+  const stage = STAGES.find(s => total >= s.min);
+  $("rStage").textContent = stage.label;
+  $("rScore").innerHTML = total + '<small>/100</small>';
+
+  // ボトルネック（最低スコア。同点なら AXES の並び順で先のもの）
+  const sorted = [...pct].sort((a,b) => a.v - b.v);
+  const low1 = sorted[0], low2 = sorted[1];
+  const typeKey = (low1.v >= 75 && total >= 80) ? "good" : low1.key;
+  const t = TYPES[typeKey];
+
+  drawRadar(pct, typeKey === "good" ? null : low1.key);
+
+  $("axlist").innerHTML = pct.map(p =>
+    '<div class="axrow' + (p.key === low1.key && typeKey !== "good" ? ' low' : '') + '">' +
+      '<div class="nm">' + p.name + '</div>' +
+      '<div class="tr"><i style="width:' + p.v + '%"></i></div>' +
+      '<div class="pc">' + p.v + '%</div>' +
+    '</div>').join("");
+
+  $("tName").textContent = t.name;
+  $("tCatch").innerHTML = t.catch;
+  $("tChecks").innerHTML = t.checks.map(c => '<li>' + c + '</li>').join("");
+  $("tWhy").innerHTML = t.why;
+  $("tSteps").innerHTML = t.steps.map(s => '<li>' + s[0] + '<span>' + s[1] + '</span></li>').join("");
+  $("tNext").innerHTML = (typeKey === "good")
+    ? '<b>' + low1.name + '</b>が5つの中では相対的に低めです。大きな穴ではありませんが、停滞したときは、まずここから見直してください。'
+    : '<b>' + low2.name + '</b>：' + NEXT_HINT[low2.key];
+  lastSummary =
+    "【痩せない原因診断】\n" +
+    "総合スコア " + total + "/100（" + stage.label + "）\n" +
+    "タイプ：" + t.name + "\n\n" +
+    pct.map(p => "・" + p.name + "：" + p.v + "%").join("\n") +
+    "\n\n一番の詰まり：" + (typeKey === "good" ? "なし（微調整の段階）" : low1.name);
+}
+
+/* ---------- レーダーチャート ---------- */
+function drawRadar(pct, lowKey){
+  const cx = 170, cy = 152, R = 96, n = pct.length;
+  const pt = (i, r) => {
+    const a = -Math.PI/2 + i * 2*Math.PI/n;
+    return [cx + Math.cos(a)*r, cy + Math.sin(a)*r];
+  };
+  let s = "";
+  [1, .75, .5, .25].forEach(k => {
+    const p = pct.map((_, i) => pt(i, R*k).map(v => v.toFixed(1)).join(",")).join(" ");
+    s += '<polygon points="' + p + '" fill="none" stroke="var(--line)" stroke-width="1"/>';
+  });
+  pct.forEach((_, i) => {
+    const [x,y] = pt(i, R);
+    s += '<line x1="' + cx + '" y1="' + cy + '" x2="' + x.toFixed(1) + '" y2="' + y.toFixed(1) + '" stroke="var(--line)" stroke-width="1"/>';
+  });
+  const dp = pct.map((p, i) => pt(i, R * Math.max(p.v, 4) / 100).map(v => v.toFixed(1)).join(",")).join(" ");
+  s += '<polygon points="' + dp + '" fill="var(--brand)" fill-opacity=".18" stroke="var(--brand)" stroke-width="2.5" stroke-linejoin="round"/>';
+  pct.forEach((p, i) => {
+    const [x,y] = pt(i, R * Math.max(p.v, 4) / 100);
+    const isLow = p.key === lowKey;
+    s += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="' + (isLow ? 5 : 3.5) + '" fill="' + (isLow ? 'var(--accent)' : 'var(--brand)') + '"/>';
+  });
+  pct.forEach((p, i) => {
+    const [x,y] = pt(i, R + 26);
+    let anchor = "middle";
+    if(x > cx + 6) anchor = "start";
+    if(x < cx - 6) anchor = "end";
+    s += '<text x="' + x.toFixed(1) + '" y="' + (y + 2).toFixed(1) + '" text-anchor="' + anchor + '" font-size="12.5" font-weight="800" fill="var(--muted)">' + p.short + '</text>';
+    s += '<text x="' + x.toFixed(1) + '" y="' + (y + 18).toFixed(1) + '" text-anchor="' + anchor + '" font-size="12" font-weight="900" fill="' + (p.key === lowKey ? 'var(--accent)' : 'var(--brand)') + '">' + p.v + '%</text>';
+  });
+  $("radar").innerHTML = s;
+}
+
+/* ---------- コピー ---------- */
+function toast(msg){
+  const el = $("toast");
+  el.textContent = msg;
+  el.classList.add("on");
+  setTimeout(() => el.classList.remove("on"), 1800);
+}
+$("copy").addEventListener("click", async () => {
+  try{ await navigator.clipboard.writeText(lastSummary); toast("結果をコピーしました"); }
+  catch(e){ toast("コピーできませんでした"); }
+});
+</script>
+</body>
+</html>
